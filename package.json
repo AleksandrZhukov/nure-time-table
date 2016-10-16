@@ -2,7 +2,8 @@
   "name": "nure-time-table",
   "version": "0.0.0",
   "scripts": {
-    "dev": "NODE_ENV=development node ./server.js"
+    "dev": "NODE_ENV=development node ./server.js",
+    "prod": "NODE_ENV=production webpack --progress --color && NODE_ENV=production node ./server.js"
   },
   "dependencies": {
     "axios": "^0.15.0",
