@@ -1,7 +1,9 @@
-extends layout
-
-block content
-  h1= title
-  #root
-  p Welcome to #{title}
-
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/dist/app.css")
+  body
+    block content
+    #app  
+    script(src="/dist/app.js")

@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
+var postcssImport = require('postcss-import');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -17,11 +18,10 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'app.js',
     publicPath: '/dist/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin('app.css', { allChunks: true, disable: !isProd }),
@@ -43,13 +43,14 @@ module.exports = {
       },
       {
         test: /(\.scss|\.css)$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]!postcss?sourceMap')
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&localIdentName=[local]_[hash:base64:5]!postcss?sourceMap')
       }
     ]
   },
-  postcss: function() {
+  postcss: function(webpack) {
     return [
-      autoprefixer, precss
+      postcssImport({ addDependencyTo: webpack }),
+      precss, autoprefixer
     ];
   }
 };
