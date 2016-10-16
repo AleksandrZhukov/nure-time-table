@@ -20,7 +20,7 @@ if (app.get('env') === 'development') {
   const config = require('./webpack.config');
 
   const compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
 // uncomment after placing your favicon in /public

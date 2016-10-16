@@ -30,7 +30,7 @@ if (isProd) {
 }
 
 module.exports = {
-  devtool: isProd ? undefined : 'cheap-module-eval-source-map',
+  devtool: isProd ? undefined : 'inline-source-map',
   entry: isProd ? ['babel-polyfill', './app/index']: ['webpack-hot-middleware/client', 'babel-polyfill', './app/index'],
   output: {
     path: path.join(__dirname, 'public'),
