@@ -1,0 +1,41 @@
+{
+  "name": "nure-time-table",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "NODE_ENV=development node ./server.js"
+  },
+  "dependencies": {
+    "axios": "^0.15.0",
+    "babel-polyfill": "^6.16.0",
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "encoding": "^0.1.12",
+    "express": "~4.14.0",
+    "iconv-lite": "^0.4.13",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.1",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "postcss": "^5.2.4",
+    "postcss-loader": "^0.13.0",
+    "precss": "^1.4.0",
+    "progress-bar-webpack-plugin": "^1.9.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.0"
+  }
+}
