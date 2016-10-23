@@ -1,22 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { getTeachersStructure, getGroupsStructure } from 'actions/app.js'
+import { Connection } from 'react-redux-connector';
 
-function mapStateToProps(state) {
-  return {
-    teachersStructure: state.app.structure.teachers,
-    groupsStructure: state.app.structure.groups
-  }
-};
-
-class HomePage extends Component {
-
+export default class HomePage extends Connection {
   render() {
     const { teachersStructure, groupsStructure } = this.props;
     return (
       <div>
-        <div onClick={ () => getTeachersStructure(this.props.dispatch)}>get teachers structure</div>
-        <div onClick={ () => getGroupsStructure(this.props.dispatch)}>get groups structure</div>
+        <div onClick={ this.$getTeachersStructure }>get teachers structure</div>
+        <div onClick={ this.$getGroupsStructure }>get groups structure</div>
+
         <div className="layout horizontal">
           <div className="ml-20 flex">
             { teachersStructure.length > 0 && teachersStructure.map(f =>
@@ -64,11 +56,8 @@ class HomePage extends Component {
               </div>
             ) }
           </div>
-
         </div>
       </div>
     )
   }
 }
-
-export default connect(mapStateToProps)(HomePage);
