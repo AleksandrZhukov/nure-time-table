@@ -2,12 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { Connection } from 'react-redux-connector';
 
 export default class HomePage extends Connection {
+  componentDidMount() {
+    this.$getTeachersStructure();
+    this.$getGroupsStructure();
+  }
+
   render() {
     const { teachersStructure, groupsStructure } = this.props;
     return (
       <div>
-        <div onClick={ this.$getTeachersStructure }>get teachers structure</div>
-        <div onClick={ this.$getGroupsStructure }>get groups structure</div>
+        <div onClick={ () => this.$getTeachersStructure() }>get teachers structure</div>
+        <div onClick={ () => this.$getGroupsStructure() }>get groups structure</div>
 
         <div className="layout horizontal">
           <div className="ml-20 flex">

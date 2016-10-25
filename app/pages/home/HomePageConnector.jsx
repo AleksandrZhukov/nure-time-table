@@ -6,6 +6,7 @@ import axios from 'axios';
 import sortBy from 'lodash/sortBy';
 import drop from 'lodash/drop';
 import head from 'lodash/head';
+import moment from 'moment';
 
 function sortFaculties(faculties) {
   const sorted = sortBy(faculties, 'full_name');
@@ -14,6 +15,17 @@ function sortFaculties(faculties) {
   } else {
     return sorted;
   }
+}
+
+function shouldUpdateStructure(type) {
+  const currentTime = moment();
+  const lastUpdate = localStorage[`lastUpdated${type}Structure`];
+  return !lastUpdate || !localStorage[`${type}Structure`] || currentTime.diff(moment(lastUpdate), 'hours') > 24;
+}
+
+function setLastUpdateTo(type, data) {
+  localStorage.setItem(`lastUpdated${type}Structure`, new Date().toISOString());
+  localStorage.setItem(`${type}Structure`, JSON.stringify(data));
 }
 
 export default class HomePageConnector extends Connector {
@@ -37,15 +49,31 @@ export default class HomePageConnector extends Connector {
     };
   }
 
-  $getTeachersStructure() {
+  $getTeachersStructure(forceUpdate = false) {
     debugger;
-    return axios.get('/api/getTeachersStructure')
-      .then(response => this.$$getTeachersStructure(response.data));
+    if (forceUpdate || shouldUpdateStructure('Teachers')) {
+      return axios.get('/api/getTeachersStructure')
+        .then(response => {
+          setLastUpdateTo('Teachers', response.data);
+          this.$$getTeachersStructure(response.data);
+        });
+    } else {
+      const data = JSON.parse(localStorage.TeachersStructure);
+      this.$$getTeachersStructure(data);
+    }
   }
 
-  $getGroupsStructure() {
+  $getGroupsStructure(forceUpdate = false) {
     debugger;
-    return axios.get('/api/getGroupsStructure')
-      .then(response => this.$$getGroupsStructure(response.data));
+    if (forceUpdate || shouldUpdateStructure('Groups')) {
+      return axios.get('/api/getGroupsStructure')
+        .then(response => {
+          setLastUpdateTo('Groups', response.data);
+          this.$$getGroupsStructure(response.data);
+        });
+    } else {
+      const data = JSON.parse(localStorage.GroupsStructure);
+      this.$$getGroupsStructure(data);
+    }
   }
 }

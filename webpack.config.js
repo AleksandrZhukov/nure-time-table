@@ -13,7 +13,8 @@ const PLUGINS = [
   new webpack.HotModuleReplacementPlugin(),
   new ExtractTextPlugin('app.css', { allChunks: true, disable: !isProd }),
   new ProgressBarPlugin({ clear: false }),
-  new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV)} })
+  new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV)} }),
+  new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
 ];
 
 if (isProd) {
