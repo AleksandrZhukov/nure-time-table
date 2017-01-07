@@ -14,6 +14,7 @@ export default class HomePage extends Connection {
         <div onClick={ () => this.$getTeachersStructure() }>get teachers structure</div>
         <div onClick={ () => this.$getGroupsStructure() }>get groups structure</div>
 
+
         <div className="layout horizontal">
           <div className="ml-20 flex">
             { teachersStructure.length > 0 && teachersStructure.map(f =>
@@ -22,12 +23,11 @@ export default class HomePage extends Connection {
                   { f.departments.length > 0 && f.departments.map(d =>
                     <div key={ d.id }>{ d.full_name }
                       <div className="ml-20">
-                        { d.teachers.length  > 0 && d.teachers.map(t =>
-                            <span key={ t.id } className="mr-5">{ t.short_name }</span>
+                        { d.teachers.length > 0 && d.teachers.map(t =>
+                          <span key={ t.id } className="mr-5">{ t.short_name }</span>
                         )}
                       </div>
                     </div>
-
                   )}
                 </div>
               </div>
@@ -47,15 +47,14 @@ export default class HomePage extends Connection {
                           <div key={ s.id }>{ s.full_name }
                             <div className="ml-20">
                               { s.groups && s.groups.length > 0 && s.groups.map(g =>
-                                 <span key={ g.id } className="mr-5">{ g.name }</span>
-                               ) }
+                                <span key={ g.id } className="mr-5">{ g.name }</span>
+                              ) }
                             </div>
                           </div>
-                          )
+                        )
                         }
                       </div>
                     </div>
-
                   )}
                 </div>
               </div>

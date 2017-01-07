@@ -7,7 +7,7 @@ import 'normalize.css';
 import 'styles/app.css';
 
 import { MainLayout } from 'layouts';
-import HomePage from 'pages/home/HomePageConnector';
+import { HomePage } from 'pages';
 
 ReactDom.render(
   <Reductor createStore={ createStore }>
